@@ -19,23 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundColour.cpp" />
+    <ClCompile Include="GLFW_EngineCore.cpp" />
+    <ClCompile Include="include\InputHandler.cpp" />
+    <ClCompile Include="InputCommand.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneStateComp.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GLAD\glad.c" />
-    <ClCompile Include="src\GLFW_EngineCore.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="StaticEnvironmentObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundColour.h" />
+    <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="GLFW_EngineCore.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\ColourComponent.h" />
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
-    <ClInclude Include="include\GLFW_EngineCore.h" />
     <ClInclude Include="include\IEngineCore.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\TransformComponent.h" />
+    <ClInclude Include="InputCommand.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelComponent.h" />
+    <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneStateComp.h" />
+    <ClInclude Include="StaticEnvironmentObject.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -110,7 +129,7 @@
     <IncludePath>include;$(IncludePath)</IncludePath>
     <LibraryPath>lib;$(LibraryPath)</LibraryPath>
     <SourcePath>src;$(SourcePath)</SourcePath>
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\bin</OutDir>
     <IntDir>temp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,7 +188,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-d.lib;glfw3.lib;opengl32.lib;freetype281.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

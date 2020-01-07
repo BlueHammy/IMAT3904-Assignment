@@ -4,12 +4,15 @@
 #include "GameObject.h"
 #include "Camera.h"
 
+class Scene;
+class Model;
+
 class Game
 {
 public:
 	Game();
 	IEngineCore* m_engineInterfacePtr;
-
+	InputHandler* getInputHandler();
 	InputHandler* m_inputHandler;
 
 	std::vector<GameObject*> v_playerCubes;
@@ -22,9 +25,6 @@ public:
 
 private:
 	//Game objects, camera and background being added for later to be initialized, moved and drawn to the screen
-	GameObject m_playerBackground;
-	GameObject m_playerCube;
-	GameObject m_playerCube1;
-	GameObject m_playerCube2;
 	Camera m_camera;
+	Scene* m_scene;
 };

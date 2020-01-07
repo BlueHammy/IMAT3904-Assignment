@@ -16,19 +16,23 @@ Game::Game()
 	//allows the game objects to be moved
 	m_playerCube.addComponent(new TransformComponent);
 	m_playerCube1.addComponent(new TransformComponent);
-	m_playerCube2.addComponent(new TransformComponent);
 	
 	
 	TransformComponent* temp = m_playerCube.getComponent<TransformComponent>();
 	TransformComponent* temp1 = m_playerCube1.getComponent<TransformComponent>();
-	TransformComponent* temp2 = m_playerCube2.getComponent<TransformComponent>();
+
 	//move the objects to where ever you want on the screen
 	temp->translate(0, 0, -5);
 	temp1->translate(1, 1, -5);
-	temp2->translate(-1, 1, -5);
+
 
 	
 
+}
+
+InputHandler * Game::getInputHandler()
+{
+	return nullptr;
 }
 
 void Game::update()

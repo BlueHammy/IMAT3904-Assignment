@@ -27,6 +27,9 @@ public:
 		m_components[typeid(T)] = comp;
 	}
 
+	virtual void OnUpdate(float dt) = 0;
+	virtual void OnMessage(const std::string m) = 0;
+
 private:
 	std::unordered_map<std::type_index, Component*> m_components;
 };

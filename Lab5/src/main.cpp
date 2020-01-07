@@ -1,6 +1,6 @@
 #define USE_GLFW 1
 #ifdef USE_GLFW
-	#include "GLFW_EngineCore.h"
+#include "GLFW_EngineCore.h"
 #endif
 
 #include "Game.h"

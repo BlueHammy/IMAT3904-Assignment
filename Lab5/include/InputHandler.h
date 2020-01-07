@@ -4,7 +4,7 @@
 #include <vector>
 #include "TransformComponent.h"
 
-
+class GameObject;
 class InputCommand
 {
 public:
@@ -12,8 +12,21 @@ public:
 	virtual void execute(GameObject& playerBackground) = 0;
 };
 
+class InputHandler
+{
+private:
 
-struct InputHandler
+	GameObject* m_playerCube;
+	std::map<int, InputCommand*> m_controlMapping;
+
+public:
+
+	InputHandler(GameObject* playerCube);	// : m_playerCube(playerCube);
+	void handleInputs(const std::vector<bool>& keyBuffer);
+};
+
+
+/*struct InputHandler
 {
 	GameObject* m_playerCube;
 
@@ -38,3 +51,4 @@ struct InputHandler
 
 	}
 };
+*/
