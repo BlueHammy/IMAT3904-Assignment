@@ -9,6 +9,9 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H 
 
+
+
+
 std::vector<bool> GLFW_EngineCore::m_keyBuffer;
 int GLFW_EngineCore::m_screenWidth;
 int GLFW_EngineCore::m_screenHeight;

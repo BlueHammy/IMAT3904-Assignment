@@ -12,7 +12,7 @@ class Model
 public:
 
 	Model(string filepath);
-
+	void render(const unsigned int shaderProgram);
 	static unsigned int TextureFromFile(const char* filepath, const string& directory, bool gamma = false);
 
 private:

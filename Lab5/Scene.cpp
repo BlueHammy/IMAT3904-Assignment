@@ -10,6 +10,7 @@
 #include "ModelManager.h"
 #include "JSON\json.h"
 
+//#include "PlayerCharacter.h" already included in Scene.h
 #include "StaticEnvironmentObject.h"
 #include "BackgroundColour.h"
 

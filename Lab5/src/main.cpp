@@ -3,7 +3,7 @@
 #include "GLFW_EngineCore.h"
 #endif
 
-#include "Game.h"
+#include "ExampleGame.h"
 
 int main(int argc, char* argv[])
 {
@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	if (!engineCore->initWindow(800, 600, "TransformAndData"))
 		return -1;
 
-	Game myFirstGame;
+	Game* myFirstGame = new ExampleGame(engineCore);
 
 	engineCore->runEngine(myFirstGame);
 
