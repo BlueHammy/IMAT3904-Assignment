@@ -120,7 +120,7 @@ double GLFW_EngineCore::getFrameDuration()
 
 void GLFW_EngineCore::renderColouredBackground(float r, float g, float b)
 {
-	glClearColor(r, g, b, 1.0f);
+	glClearColor(r, g, b, 4.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
