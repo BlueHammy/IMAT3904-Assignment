@@ -12,7 +12,6 @@ class PlayerCharacter : public GameObject
 
 public:
 
-	// constructor
 	PlayerCharacter(Model* model, glm::vec3 position, glm::quat orientation);
 	~PlayerCharacter();
 

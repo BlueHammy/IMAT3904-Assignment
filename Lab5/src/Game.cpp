@@ -1,8 +1,5 @@
-
-
 #include "Model.h"
 #include "Game.h"
-
 #include "TransformComponent.h"
 #include "ColourComponent.h"
 #include "ModelComponent.h"

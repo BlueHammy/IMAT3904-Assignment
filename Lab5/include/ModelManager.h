@@ -15,7 +15,7 @@ public:
 	}
 	~ModelManager()
 	{
-		// would delete models later....
+
 	}
 
 	Model* getModel(std::string filename);

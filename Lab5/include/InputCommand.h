@@ -1,6 +1,5 @@
 #pragma once
 
-// forward declaration - better than including the .h file if we don't need internal details
 class GameObject;
 
 class InputCommand
@@ -10,7 +9,7 @@ public:
 	virtual void execute(GameObject& player) = 0;
 };
 
-// classes implementing the InputCommand interface (implementations are in the .cpp file)
+
 class RotateLeftCommand : public InputCommand
 {
 	void execute(GameObject& player);

@@ -18,9 +18,9 @@ StaticEnvironmentObject::~StaticEnvironmentObject()
 
 void StaticEnvironmentObject::OnUpdate(float dt)
 {
-	// nothing yet
+	
 }
 void StaticEnvironmentObject::OnMessage(const std::string msg)
 {
-	// nothing yet
+	
 }

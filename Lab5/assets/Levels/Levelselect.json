@@ -1,0 +1,10 @@
+{
+  "GameObjects": [
+      {"name": "gnd", "model": "ground1.obj", "position": [0.0,0.0,0.0]},  
+      {"name": "goCube1", "model": "cube1.obj", "position": [0.0,0.0,0.0]},
+	  {"name": "goCube2", "model": "cube1.obj", "position": [-3.0,0.0,-5.0]},
+	  {"name": "goSphere1", "model": "sphere.obj", "position": [0.0,1.0,-5.0]},
+	  {"name": "goCube3", "model": "cube1.obj", "position": [3.0,0.0,-5.0]},
+	  {"name": "goSphere2", "model": "sphere.obj", "position": [0.0,1.0,-10.0]}
+  ]
+}

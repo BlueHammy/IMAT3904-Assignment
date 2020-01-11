@@ -5,24 +5,13 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/mat4x4.hpp>
 
-// possible answer to the roll problem
-// https://stackoverflow.com/questions/20855797/quaternion-based-camera-unwanted-roll
-
-// use this define to switch between old implementation and new one keeping yaw and pitch seperate 
 #define NO_ROLL (1)
-
-//quat from euler angles - work with that later?
-//q = qyaw qpitch qroll where:  (NOTE ORDER MATTERS)
-//qroll = [cos(y / 2), (sin(y / 2), 0, 0)]
-//	qpitch = [cos(q / 2), (0, sin(q / 2), 0)]
-//	qyaw = [cos(f / 2), (0, 0, sin(f / 2)]
 
 class TransformComponent : public Component
 {
 
-	// values for HP home desktop
-	const float moveStepsize = 1.0f / 256.0f; // 0.004f;  accurate binary value
-	const float rotateStepsize = 1.0f / 512.0f;	// 0.001f;
+	const float moveStepsize = 1.0f / 256.0f;
+	const float rotateStepsize = 1.0f / 512.0f;
 
 public:
 	glm::vec3 m_position;
@@ -56,10 +45,9 @@ public:
 	void OnUpdate(float dt) override {}
 	void OnMessage(const std::string m) override
 	{
-		// e.g.	if (m == "rotateLeft")
 		if (m == "rotateLeft")
 		{
-			yaw(rotateStepsize);		// anti clockwise
+			yaw(rotateStepsize);
 		}
 		if (m == "rotateRight")
 		{
@@ -68,7 +56,7 @@ public:
 
 		if (m == "rotateUp")
 		{
-			pitch(-rotateStepsize);		// anti clockwise
+			pitch(-rotateStepsize);	
 		}
 		if (m == "rotateDown")
 		{
@@ -95,7 +83,7 @@ public:
 
 		if (m == "moveUp")
 		{
-			glm::vec3 v = glm::vec3(0, moveStepsize, 0); //smaller amount here
+			glm::vec3 v = glm::vec3(0, moveStepsize, 0);
 #if NO_ROLL
 			translate(getOrientation() * v);
 #else
@@ -127,9 +115,6 @@ public:
 #if NO_ROLL
 	TransformComponent() : m_position(0), m_orientationYaw(1, 0, 0, 0), m_orientationPitch(1, 0, 0, 0), m_scale(1.0f) {}
 	TransformComponent(const glm::vec3& pos) : m_position(pos), m_orientationYaw(1, 0, 0, 0), m_orientationPitch(1, 0, 0, 0), m_scale(1.0f) {}
-	//TransformComponent(const glm::vec3& pos, const glm::quat& orient) : m_position(pos), m_orientationYaw(orient), m_scale(1.0f) {}
-	//TransformComponent(const glm::vec3& pos, const glm::quat& orient, const glm::vec3& scale) : m_position(pos), m_orientation(orient), m_scale(scale) {}
-
 
 	TransformComponent(const glm::vec3& pos, const glm::quat& orientY) : m_position(pos), m_orientationYaw(orientY), m_orientationPitch(1, 0, 0, 0), m_scale(1.0f) {}
 	TransformComponent(const glm::vec3& pos, const glm::quat& orientY, const glm::quat& orientP) : m_position(pos), m_orientationYaw(orientY), m_orientationPitch(orientP), m_scale(1.0f) {}
@@ -161,30 +146,21 @@ public:
 	void translate(const glm::vec3 &v) { m_position += v; }
 	void translate(float x, float y, float z) { m_position += glm::vec3(x, y, z); }
 
-	// this is not used in steves pitch roll yaw calls
-	//	void rotate(float angle, const glm::vec3 &axis) 
-	//	{ 
-	//#if NO_ROLL
-	//#else
-	//		m_orientation *= glm::angleAxis(angle, m_orientation * axis); 
-	//#endif
-	//	}
 
 #if NO_ROLL
 #else
 	void rotate(float angle, float x, float y, float z) {
-		// show lecture
+
 #if 1
-		glm::vec3 anglesBefore = glm::eulerAngles(m_orientation); //pitch yaw roll
+		glm::vec3 anglesBefore = glm::eulerAngles(m_orientation); 
 
-																  // look at this
-		m_orientation *= glm::angleAxis(angle, glm::vec3(x, y, z)); // *m_orientation);  //order altered - put back - PC makes no odds
+		m_orientation *= glm::angleAxis(angle, glm::vec3(x, y, z)); 
 
-		glm::vec3 anglesAfter = glm::eulerAngles(m_orientation); //pitch yaw roll
+		glm::vec3 anglesAfter = glm::eulerAngles(m_orientation); 
 
 #else
-		// this is steve's implementation
-		m_orientation *= glm::angleAxis(angle, glm::vec3(x, y, z) * m_orientation);  //order altered - put back - PC makes no odds
+
+		m_orientation *= glm::angleAxis(angle, glm::vec3(x, y, z) * m_orientation); 
 #endif
 	}
 #endif
@@ -205,12 +181,12 @@ public:
 	void pitch(float angle) { rotate(angle, 1.0f, 0.0f, 0.0f); }
 	void roll(float angle) { rotate(angle, 0.0f, 0.0f, 1.0f); }
 #endif
-	// used to show on display...
+
 	glm::vec3 getEulerAngles()
 	{
 #if NO_ROLL
 		glm::quat m_orientation = m_orientationYaw * m_orientationPitch;
 #endif
-		return glm::eulerAngles(m_orientation); //pitch yaw roll
+		return glm::eulerAngles(m_orientation); 
 	}
 };

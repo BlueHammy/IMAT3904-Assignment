@@ -1,0 +1,15 @@
+{
+  "GameObjects": [
+      {"name": "gnd", "model": "ground4.obj", "position": [0.0,0.0,0.0]},  
+      {"name": "goCone1", "model": "cone.obj", "position": [0.0,0.0,0.0]},
+	  {"name": "goCube1", "model": "cube1.obj", "position": [-12.0,0.0,-7.0]},
+	  {"name": "goSphere", "model": "sphere.obj", "position": [5.0,1.0,-5.0]},
+	  {"name": "goSphere2", "model": "sphere.obj", "position": [6.5,1.0,-5.0]},	  
+	  {"name": "goCylinder1", "model": "cylinder.obj", "position": [12.0,0.0,-4.0]},
+	  {"name": "goCylinder2", "model": "cylinder.obj", "position": [16.0,0.0,-7.0]},
+    {"name": "goCylinder3", "model": "cylinder.obj", "position": [20.0,0.0,-2.0]},
+    {"name": "goCylinder4", "model": "cylinder.obj", "position": [13.0,0.0,-8.0]},
+    {"name": "goCylinder5", "model": "cylinder.obj", "position": [10.0,0.0,-10.0]},
+    {"name": "goSphere3", "model": "sphere.obj", "position": [0.0,1.0,-12.0]}
+  ]
+}

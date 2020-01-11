@@ -17,7 +17,7 @@ void SceneStateComp::OnUpdate(float dt)
 }
 void SceneStateComp::OnMessage(const std::string msg)
 {
-	if (msg == "Level1") //allowing the user to change levels if they have an input command to assign buttons to change the levels.
+	if (msg == "Level1") //allows user to change levels if they have an input command set up
 	{
 		SetSceneIndex(0);
 	}

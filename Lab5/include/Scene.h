@@ -1,6 +1,5 @@
 #pragma once
 
-// include assimp first - error C2589 for 
 #include "Model.h"
 
 #include "GameObject.h"
@@ -9,8 +8,6 @@
 
 #include <string>
 
-
-//class Model;
 class ModelManager;
 
 
@@ -48,9 +45,7 @@ private:
 
 	std::vector<GameObject*> v_gameObjects;
 	ModelManager* m_theModelManager;
-
-	// mouse data - we keep old position (last frame or update) so we can get delta's
-
+	
 	double m_oldMouseX;
 	double m_oldMouseY;
 	double m_mouseX;

@@ -36,7 +36,7 @@ void PlayerCharacter::OnMessage(const std::string msg)
 	}
 	else if (msg == "Level1")
 	{
-		// pass message on to sceneComponent
+	
 		getComponent<SceneStateComp>()->OnMessage("Level1");
 	}
 	else if (msg == "Level2")
@@ -46,7 +46,7 @@ void PlayerCharacter::OnMessage(const std::string msg)
 	}
 	else
 	{
-		// pass message to transform component
+		
 		tc->OnMessage(msg);
 	}
 	SetCameraPositionFromTransformComponent(tc);
@@ -54,23 +54,23 @@ void PlayerCharacter::OnMessage(const std::string msg)
 
 void PlayerCharacter::SetCameraPositionFromTransformComponent(TransformComponent* tc)
 {
-	// get resulting position
+	
 	glm::vec3 pos = tc->m_position;
 	glm::quat orient = tc->getOrientation();
-	// camera behind and above us OR at centre...
+	
 
-	glm::vec3 relativePosition;		// could use ? operator here
+	glm::vec3 relativePosition;
 	if (m_cameraState == CameraViewState::thirdPersonCamera)
 	{
-		relativePosition = glm::vec3(0, 1.5, 6);		//above and behind
+		relativePosition = glm::vec3(0, 1.5, 6);		
 	}
 	else
 	{
-		relativePosition = glm::vec3(0, 0.5, -0.95);	//just in front of model
+		relativePosition = glm::vec3(0, 0.5, -0.95);	
 	}
 	pos += orient * relativePosition;
 
-	// put camera there
+	
 	CameraComponent* cc = getComponent<CameraComponent>();
 	cc->setPosition(pos);
 	cc->setOrientation(orient);

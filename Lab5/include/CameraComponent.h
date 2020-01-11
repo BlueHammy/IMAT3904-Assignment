@@ -27,7 +27,6 @@ public:
 	const glm::vec3& position() const { return m_position; }
 	const glm::quat& orientation() const { return m_orientation; }
 
-	// added setters
 	void setPosition(const glm::vec3 newPosition)
 	{
 		m_position = newPosition;
@@ -40,13 +39,11 @@ public:
 
 	glm::mat4 getViewMatrix() const
 	{
-		// try this....
 		return glm::translate(glm::mat4_cast(inverse(m_orientation)), -m_position);
 	}
 
 #if 0
 
-	// if camera pos and orientation are copied from transform then these are not used
 
 	void translate(const glm::vec3 &v) { m_position += v * m_orientation; }
 	void translate(float x, float y, float z) { m_position += glm::vec3(x, y, z) * m_orientation; }
@@ -61,7 +58,6 @@ public:
 	void setFOV(float fov) { m_fov = fov; }
 
 
-	// component interface - not used currently
 
 	void OnUpdate(float dt) override
 	{

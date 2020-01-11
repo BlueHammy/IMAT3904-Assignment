@@ -2,19 +2,11 @@
 
 #include "ModelManager.h"
 #include "Scene.h"
-
-//needed for test code
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "SceneStateComp.h"
-
-//#include <stdio.h>
 #include <string>
-//#include <vector>
-//#include <iostream>
-//#include <fstream>
 #include <sstream>
-//#include "InputHandler.h"
 
 
 ExampleGame::ExampleGame(IEngineCore* engine) : Game(engine)
@@ -46,26 +38,19 @@ void ExampleGame::render()
 	{
 		glm::vec3 eulerAngles = m_scene->getPlayer()->getEulerAngles();
 
-		// convert to deg
 		eulerAngles.x = glm::degrees(eulerAngles.x);
 		eulerAngles.y = glm::degrees(eulerAngles.y);
 		eulerAngles.z = glm::degrees(eulerAngles.z);
 		std::ostringstream oss;
-		oss << " (" << eulerAngles.x << ", " << eulerAngles.y << ", " << eulerAngles.z << ")"; // fps:" << (1 / frameDuration);
-																							   //oss << frameDuration;
+		oss << " (" << eulerAngles.x << ", " << eulerAngles.y << ", " << eulerAngles.z << ")"; 
+																							   
 		m_engineInterfacePtr->renderText(oss.str(), 0.01f, 0.01f, 1, glm::vec3(1, 1, 0));
 	}
 }
 
-//bool ExampleGame::loadLevelJSON(std::string levelJSONFile)
-//{
-//
-//
-//}
-
 void ExampleGame::Initialise()
 {
-	m_theModelManager = new ModelManager();	// singleton later...
+	m_theModelManager = new ModelManager();	
 	m_scene = new Scene(m_levelNames[m_sceneIndex], m_theModelManager, m_engineInterfacePtr);
 	m_inputHandler = new InputHandler(m_scene->getPlayer());
 }

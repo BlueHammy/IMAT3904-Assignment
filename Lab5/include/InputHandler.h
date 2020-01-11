@@ -3,11 +3,8 @@
 #include <vector>
 #include "Input.h"
 
-
-
 class GameObject;
 
-// much better here as a class, not a struct
 class InputHandler
 {
 private:
@@ -17,6 +14,6 @@ private:
 
 public:
 
-	InputHandler(GameObject* playerCube);	// : m_playerCube(playerCube);
+	InputHandler(GameObject* playerCube);
 	void handleInputs(const std::vector<bool>& keyBuffer);
 };

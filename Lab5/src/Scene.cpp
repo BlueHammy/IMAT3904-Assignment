@@ -10,7 +10,6 @@
 #include "ModelManager.h"
 #include "JSON\json.h"
 
-//#include "PlayerCharacter.h" already included in Scene.h
 #include "StaticEnvironmentObject.h"
 #include "BackgroundColour.h"
 
@@ -45,23 +44,18 @@ void Scene::update(float dt)
 
 void Scene::render(IEngineCore* engineCore)
 {
-	// try mouse code here?
 
 	PlayerCharacter* playerCharacter = getPlayer();
 
-
-	// keep the old mouse position and button state
 	m_oldMouseX = m_mouseX;
 	m_oldMouseY = m_mouseY;
 	m_oldMouseButtons = m_mouseButtons;
 
-	// get the current mouse pos and button state
 	engineCore->getMouseState(m_mouseX, m_mouseY, m_mouseButtons);
 
 	double xDelta = m_mouseX - m_oldMouseX;
 	double yDelta = m_mouseY - m_oldMouseY;
 
-	// do we have a new button press
 	if ((m_mouseButtons & 0x1) & !(m_oldMouseButtons & 0x1))
 	{
 		m_mouseEnabled = !m_mouseEnabled;
@@ -70,22 +64,19 @@ void Scene::render(IEngineCore* engineCore)
 
 	if (m_mouseEnabled)
 	{
-		const float mouseSensitivity = 200.0f;	// related to scrfeenwidth later might be better!
+		const float mouseSensitivity = 200.0f;	
 
 		float theta = static_cast<float>(xDelta) / mouseSensitivity;
-		float thi = static_cast<float>(yDelta) / mouseSensitivity;		// use screen width later...
+		float thi = static_cast<float>(yDelta) / mouseSensitivity;
 
 		TransformComponent* transformComponent = playerCharacter->getComponent<TransformComponent>();
 
-		// apply the transforms seperately to avoid roll
 		transformComponent->pitch(thi);
 		transformComponent->yaw(theta);
 
 		playerCharacter->SetCameraPositionFromTransformComponent(transformComponent);
 	}
 
-
-	// do open gl setup for the frame (renderColourBackground is not the most informative name)
 	float redValue = 0, greenValue = 0, blueValue = 1;
 	if (m_playerBackground->getComponent<RedComponent>())
 		redValue = m_playerBackground->getComponent<RedComponent>()->m_colourValue;
@@ -96,10 +87,8 @@ void Scene::render(IEngineCore* engineCore)
 
 	engineCore->renderColouredBackground(redValue, greenValue, blueValue);
 
-	// update the camera
 	engineCore->setCamera(getPlayer()->getComponent<CameraComponent>());
 
-	// draw the game objects
 	for (auto gameObject : v_gameObjects)
 	{
 		Model* model = gameObject->getComponent<ModelComponent>()->getModel();
@@ -118,7 +107,7 @@ bool Scene::loadLevelJSON(std::string levelJSONFile)
 	Json::Reader reader;
 
 	jsonData.open(levelJSONFile.c_str());
-	// check for errors
+	
 	if (!reader.parse(jsonData, root))
 	{
 		std::cout << "Failed to parse data from: "
@@ -130,30 +119,19 @@ bool Scene::loadLevelJSON(std::string levelJSONFile)
 	}
 	const Json::Value gameObjects = root["GameObjects"];
 
-	//
+	
 
 	int numberOfCubes = gameObjects.size();
-	//v_GameObjects.resize(numberOfCubes);
-
-	// size() tells us how large the array is
+	
 	for (int i = 0; i < (int)gameObjects.size(); i++)
 	{
 
-
-
-		////////////////////////////////////////////////////////
-
-		// get string
 		std::cout << gameObjects[i]["name"].asString() << " loaded\n";
 
 
-
-
-		// link this to model
-
 		const Json::Value modelNode = gameObjects[i]["model"];
 
-		std::string modelName = modelNode.asString();	// no index as not an array
+		std::string modelName = modelNode.asString();	
 
 		Model* model{ nullptr };
 
@@ -163,20 +141,18 @@ bool Scene::loadLevelJSON(std::string levelJSONFile)
 		}
 		else
 		{
-			model = m_theModelManager->getModel("assets/models/cone.obj");			// change to error model later....
+			model = m_theModelManager->getModel("assets/models/cone.obj");
 		}
 
-		// test for no model later!!!!!
-
+		
 		if (model == nullptr)
 		{
 			loadOK = false;
 		}
 
 		float x, y, z;
-		// get the position node
 		const Json::Value posNode = gameObjects[i]["position"];
-		x = posNode[0].asFloat(); // get float
+		x = posNode[0].asFloat(); 
 		y = posNode[1].asFloat();
 		z = posNode[2].asFloat();
 
@@ -191,7 +167,6 @@ bool Scene::loadLevelJSON(std::string levelJSONFile)
 		if (orientNode.type() != Json::nullValue)
 		{
 
-			// get orientation here e.t.c.
 
 		}
 
@@ -201,13 +176,13 @@ bool Scene::loadLevelJSON(std::string levelJSONFile)
 		if (scaleNode.type() != Json::nullValue)
 		{
 
-			// get scale here e.t.c.
+
 
 		}
 
 		std::cout << x << "," << y << "," << z << std::endl;
 
-		// todo - fix this to be data dependent
+		
 		if (i == m_playerIndex)
 		{
 			v_gameObjects.push_back(new PlayerCharacter(model, position, orientation));
@@ -234,7 +209,7 @@ bool Scene::loadLevelJSONOLD(std::string levelJSONFile)
 	Json::Reader reader;
 
 	jsonData.open(levelJSONFile.c_str());
-	// check for errors
+
 	if (!reader.parse(jsonData, root))
 	{
 		std::cout << "Failed to parse data from: "
@@ -244,30 +219,23 @@ bool Scene::loadLevelJSONOLD(std::string levelJSONFile)
 	}
 	const Json::Value gameObjects = root["GameObjects"];
 
-	//
-
+	
 	int numberOfCubes = gameObjects.size();
-	//v_GameObjects.resize(numberOfCubes);
+	
 
-	// size() tells us how large the array is
 	for (int i = 0; i < (int)gameObjects.size(); i++)
 	{
 
 
 
-		////////////////////////////////////////////////////////
-
-		// get string
+		
 		std::cout << gameObjects[i]["name"].asString() << " loaded\n";
 
 
-		// link this to model later....
-
-
 		float x, y, z;
-		// get the position node
+		
 		const Json::Value posNode = gameObjects[i]["position"];
-		x = posNode[0].asFloat(); // get float
+		x = posNode[0].asFloat(); 
 		y = posNode[1].asFloat();
 		z = posNode[2].asFloat();
 
@@ -280,7 +248,7 @@ bool Scene::loadLevelJSONOLD(std::string levelJSONFile)
 		if (orientNode.type() != Json::nullValue)
 		{
 
-			// get orientation here e.t.c.
+			
 
 		}
 
@@ -290,10 +258,10 @@ bool Scene::loadLevelJSONOLD(std::string levelJSONFile)
 		if (scaleNode.type() != Json::nullValue)
 		{
 
-			// get scale here e.t.c.
+			
 
 		}
-		// todo - fix this to be data dependent
+		
 		if (i == 0)
 		{
 			v_gameObjects.push_back(new PlayerCharacter(m_model, position, orientation));
@@ -326,7 +294,7 @@ PlayerCharacter* Scene::getPlayer()
 void Scene::loadLevel(std::string levelFile)
 {
 
-	Model* model = nullptr;;	//fix if we use this
+	Model* model = nullptr;;	
 
 	std::ifstream myInputFile;
 	myInputFile.open(levelFile, std::ios_base::in);
@@ -338,16 +306,14 @@ void Scene::loadLevel(std::string levelFile)
 
 	if (myInputFile.is_open())
 	{
-		// read the first line which has the number of elements
+		
 		std::getline(myInputFile, s);
 		ss.str(s);
-		ss.ignore(17); // ignore the first 20 chars
+		ss.ignore(17); 
 
-					   //std::string title;
-					   //ss >> title;
 		ss >> numCubesToRead;
 
-		// resize the correct size for the vector
+		
 		v_gameObjects.resize(numCubesToRead);
 		ss.clear();
 
@@ -356,10 +322,6 @@ void Scene::loadLevel(std::string levelFile)
 			getline(myInputFile, s);
 			ss.clear();
 			ss.str(s);
-
-			// cube x - just ignore for now..
-
-			// use a stringstream to get integer values
 			getline(myInputFile, s);
 			ss.clear();
 			ss.str(s);

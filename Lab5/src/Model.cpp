@@ -30,14 +30,14 @@ void Model::loadModel(string filepath)
 
 void Model::processNode(aiNode* node, const aiScene* scene)
 {
-	// get the meshes of the node and add them to our vector
+	
 	for (int i = 0; i < static_cast<int>(node->mNumMeshes); i++)
 	{
 		int sceneMeshIndex = node->mMeshes[i];
 		aiMesh* mesh = scene->mMeshes[sceneMeshIndex];
 		v_meshes.push_back(processMesh(mesh, scene));
 	}
-	// recursively process the nodes of any children
+	
 	for (int i = 0; i < static_cast<int>(node->mNumChildren); i++)
 	{
 		processNode(node->mChildren[i], scene);
@@ -46,23 +46,21 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
-	// data to fill
+	
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
 	vector<Texture> textures;
 
-	// create enough space for the vertices and indices
+	
 	vertices.resize(mesh->mNumVertices);
-	indices.resize(mesh->mNumFaces * 3); // imported as triangles
+	indices.resize(mesh->mNumFaces * 3); 
 
-										 // for each vertex of the mesh copy the data to out own mesh format
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
-		// all meshes should have vertices and normals
+
 		vertices[i].position = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
 		vertices[i].normal = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
 
-		// check if the mesh has texture coordinates
 		if (mesh->mTextureCoords[0])
 		{
 			vertices[i].textureCoords = glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
@@ -74,15 +72,15 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 
 	}
 
-	// save all the vertex indices in the indices vector
+	
 	for (int i = 0; i < static_cast<int>(mesh->mNumFaces); i++)
 	{
-		// retrieve all indices of the face and store them in the indices vector
+		
 		for (int j = 0; j < static_cast<int>(mesh->mFaces[i].mNumIndices); j++)
 			indices[3 * i + j] = mesh->mFaces[i].mIndices[j];
 	}
 
-	// get material textures (if there are any)
+	
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
@@ -92,13 +90,13 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
 		vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
 
-		// put all the textures together in a single vector
+
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 	}
-	// return the mesh data
+	
 	return Mesh(vertices, indices, textures);
 }
 
@@ -129,20 +127,19 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 		}
 		if (!b_loadedTexture)
 		{
-			// setup a new texture
+			
 			Texture texture;
 			texture.id = TextureFromFile(str.C_Str(), directory);
 			texture.type = typeName;
 			texture.filepath = str;
 			textures.push_back(texture);
-			v_textures.push_back(texture); // add to loaded textures
+			v_textures.push_back(texture); 
 		}
 	}
 	return textures;
 }
 
 
-// static function to load a texture using lightweight stb_image library
 unsigned int Model::TextureFromFile(const char* filepath, const string& directory, bool gamma)
 {
 	string filename = string(filepath);

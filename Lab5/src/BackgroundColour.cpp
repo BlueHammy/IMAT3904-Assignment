@@ -11,7 +11,6 @@ BackgroundColour::BackgroundColour()
 	addComponent(new BlueComponent());
 }
 
-// needed for the input command interface...
 void BackgroundColour::OnUpdate(float dt)
 {
 }

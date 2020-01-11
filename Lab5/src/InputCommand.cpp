@@ -61,7 +61,7 @@ void CameraThirdCommand::execute(GameObject& player)
 
 void ResetCommand::execute(GameObject& player)
 {
-	player.OnMessage("reset");
+	player.OnMessage("Restart");
 }
 
 
