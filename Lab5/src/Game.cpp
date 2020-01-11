@@ -15,10 +15,3 @@ InputHandler* Game::getInputHandler()
 {
 	return m_inputHandler;
 }
-
-//void Game::update()
-//{
-		
-//	void loadLevel(std::string levelFile);
-	
-//}

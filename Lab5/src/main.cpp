@@ -3,6 +3,9 @@
 #include "GLFW_EngineCore.h"
 #endif
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image/stb_image.h>
+
 #include "ExampleGame.h"
 
 int main(int argc, char* argv[])
