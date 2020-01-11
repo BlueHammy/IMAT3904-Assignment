@@ -1,12 +1,10 @@
 #pragma once
 #include "Component.h"
 
-#define COLOUR_ADJUSTMENT_VALUE 0.001f
-
 class ColourComponent : public Component
 {
 public:
-	ColourComponent() : m_colourValue(0.0222) {};
+	ColourComponent() : m_colourValue(0.25) {};
 
 	void OnUpdate(float dt) override
 	{
@@ -17,18 +15,20 @@ public:
 	{
 		if (m == "increase")
 		{
-			m_colourValue += COLOUR_ADJUSTMENT_VALUE;
+			m_colourValue += ColourAdjustmentValue;
 		}
 		else if (m == "decrease")
 		{
-			m_colourValue -= COLOUR_ADJUSTMENT_VALUE;
+			m_colourValue -= ColourAdjustmentValue;
 		}
 	}
-
 	float m_colourValue;
+
+private:
+	const float ColourAdjustmentValue = 0.001f;
+
 };
 
 class RedComponent : public ColourComponent {};
 class GreenComponent : public ColourComponent {};
 class BlueComponent : public ColourComponent {};
-

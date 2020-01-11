@@ -4,8 +4,9 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <glm/mat4x4.hpp>
-#include <map>
 #include "CameraComponent.h"
+#include <map>
+
 
 class Model;
 class Game;

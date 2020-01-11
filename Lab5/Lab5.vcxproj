@@ -19,45 +19,46 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BackgroundColour.cpp" />
-    <ClCompile Include="ExampleGame.cpp" />
-    <ClCompile Include="GLFW_EngineCore.cpp" />
-    <ClCompile Include="include\InputHandler.cpp" />
-    <ClCompile Include="InputCommand.cpp" />
-    <ClCompile Include="jsoncpp.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ModelManager.cpp" />
-    <ClCompile Include="PlayerCharacter.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneStateComp.cpp" />
+    <ClCompile Include="src\GLFW_EngineCore.cpp" />
+    <ClCompile Include="src\InputHandler.cpp" />
+    <ClCompile Include="src\jsoncpp.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\BackgroundColour.cpp" />
+    <ClCompile Include="src\ExampleGame.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GLAD\glad.c" />
+    <ClCompile Include="src\InputCommand.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="StaticEnvironmentObject.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\Model.cpp" />
+    <ClCompile Include="src\ModelManager.cpp" />
+    <ClCompile Include="src\PlayerCharacter.cpp" />
+    <ClCompile Include="src\SceneStateComp.cpp" />
+    <ClCompile Include="src\StaticEnvironmentObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackgroundColour.h" />
-    <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="ExampleGame.h" />
-    <ClInclude Include="ft2build.h" />
-    <ClInclude Include="GLFW_EngineCore.h" />
+    <ClInclude Include="include\ExampleGame.h" />
+    <ClInclude Include="include\BackgroundColour.h" />
+    <ClInclude Include="include\CameraComponent.h" />
     <ClInclude Include="include\ColourComponent.h" />
     <ClInclude Include="include\Component.h" />
+    <ClInclude Include="include\ft2build.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\GLFW_EngineCore.h" />
     <ClInclude Include="include\IEngineCore.h" />
+    <ClInclude Include="include\Input.h" />
     <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\Mesh.h" />
+    <ClInclude Include="include\Model.h" />
+    <ClInclude Include="include\ModelComponent.h" />
+    <ClInclude Include="include\ModelManager.h" />
+    <ClInclude Include="include\PlayerCharacter.h" />
+    <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\SceneStateComp.h" />
+    <ClInclude Include="include\StaticEnvironmentObject.h" />
     <ClInclude Include="include\TransformComponent.h" />
-    <ClInclude Include="InputCommand.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="ModelComponent.h" />
-    <ClInclude Include="ModelManager.h" />
-    <ClInclude Include="PlayerCharacter.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneStateComp.h" />
-    <ClInclude Include="StaticEnvironmentObject.h" />
+    <ClInclude Include="include\InputCommand.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -151,12 +152,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>assimp-vc140-d.lib;glfw3.lib;opengl32.lib;freetype281.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -184,7 +188,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
